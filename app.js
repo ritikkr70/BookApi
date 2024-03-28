@@ -2,16 +2,16 @@ import express from "express";
 import booksRoute from "./routes/bookRoutes.js";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
 
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(bodyParser.json());
 
+
 mongoose
-  .connect(
-    "mongodb+srv://ritikkr70:IvGGtQewvoBKqMpT@bookdb.efwstof.mongodb.net/?retryWrites=true&w=majority&appName=bookDb",
-    {}
-  )
+  .connect(process.env.MONGO_URI)
   .then(async (connection) => {
     console.log("MongoDB Connetion Successfull");
   })
